@@ -1,5 +1,6 @@
 # Personal-Summarizer-Ollama-LangChain_V2_Streamlit
 
+```
 project/
 │
 ├── main.py
@@ -9,3 +10,4 @@ project/
 └── src/
     └── modules/
         └── summariser.py
+```
