@@ -108,6 +108,7 @@ project/
 - Before executing the project, ensure that ollama is running.
 - Bear in mind that all processing and inference are performed locally.
 - Make sure your system supports running the selected LLM ```(some may require > 8GB RAM).```
+- In the notebook folder, there is the ipynb file which was used to first test the app's functionality.
 
 ## ⚠️ **Limitations**
 - **Model Selection:** The accuracy of responses depends on the model you choose. Some models may generate better results than others. It is then a good practice to verify the model that suits your needs.
