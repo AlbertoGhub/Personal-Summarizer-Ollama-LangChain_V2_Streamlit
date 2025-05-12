@@ -38,7 +38,7 @@ To run the **Chat with Your PDF** application locally, follow the steps below.
 git clone https://github.com/AlbertoGhub/Personal-Summarizer-Ollama-LangChain_V2_Streamlit.git
 ```
 ### 2. Install Dependencies
-- #### Create the virtual envirtual environment
+- #### Create the virtual environment
 
 ```bash
 python3 -m venv venv
@@ -66,7 +66,7 @@ streamlit run app.py
 
 This will launch the Streamlit interface in your browser, where you can upload your PDF and start interacting with it.
 
-# ***Insert interface image***
+<img width="1439" alt="Image" src="https://github.com/user-attachments/assets/969480c9-5cfc-40a7-bb1f-174c39a665a3" />
 
 ### 5. 🧠 How It Works
 - **Upload Your PDF:** Select the PDF you wish to interact with. The document will be processed to extract its contents. Enable or disable the sample document with a using the check box ```Use sample``` — perfect for trying out the app instantly. 
