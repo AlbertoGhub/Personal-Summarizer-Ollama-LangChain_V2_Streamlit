@@ -69,19 +69,17 @@ This will launch the Streamlit interface in your browser, where you can upload y
 <img width="1439" alt="Image" src="https://github.com/user-attachments/assets/969480c9-5cfc-40a7-bb1f-174c39a665a3" />
 
 ### 5. 🧠 How It Works
-- **Upload Your PDF:** Select the PDF you wish to interact with. The document will be processed to extract its contents. Enable or disable the sample document with a using the check box ```Use sample``` — perfect for trying out the app instantly. 
+- **Upload Your PDF:** Select the PDF you wish to interact with. The document will be processed to extract its contents. Enable or disable the sample document with using the check box ```Use sample``` — perfect for trying out the app instantly. 
 
-# ***Insert toggle image***
+<img width="1426" alt="Image" src="https://github.com/user-attachments/assets/59da36f3-c7f5-4c51-9c12-4c01a739837d" />
 
 - **Text Splitting:** The PDF content is split into chunks to make it easier to search and retrieve information.
 
 - **Model Selection:** Choose a language model installed locally with Ollama from the list provided. This model will be used to generate the responses to your queries.
 
-# ***Insert list of models image***
+<img width="325" alt="Image" src="https://github.com/user-attachments/assets/e10a0e7c-e6b9-4bd3-b3e1-35984d4ad398" />
 
 - **Ask Questions:** Type your questions related to the document. The app will generate accurate, context-aware responses based on the document's content.
-
-# ***Insert chat image***
 
 - **Retrieval-Augmented Generation:** The system uses RAG to enhance the response by retrieving relevant document excerpts, ensuring your answers are grounded in the document.
 
