@@ -81,6 +81,7 @@ def extract_model_names(models_info: Any) -> Tuple[str, ...]:
         logger.error(f"Error extracting model names: {e}")
         return tuple()
 
+# CREATING THE VECTORSTORE
 def create_vector_db(file_upload) -> Chroma:
     """
     Create a vector database from an uploaded PDF file.
@@ -98,7 +99,7 @@ def create_vector_db(file_upload) -> Chroma:
     chunks = text_splitter.split_documents(data)
     logger.info("Document split into chunks")
 
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+    embeddings = OllamaEmbeddings(model="nomic-embed-text") # I can use "mxbai-embed-large:latest" but nomic is faster for testing purposes
     vector_db = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
@@ -107,7 +108,7 @@ def create_vector_db(file_upload) -> Chroma:
     )
     logger.info("Vector DB created with persistent storage")
 
-    shutil.rmtree(temp_dir)
+    shutil.rmtree(temp_dir) # Deleting the temp directory after ingesting it
     logger.info(f"Temporary directory {temp_dir} removed")
     return vector_db
 
@@ -128,18 +129,21 @@ def process_question(question: str, vector_db: Chroma, selected_model: str) -> s
         Original question: {question}""",
     )
 
+    # Retrieving the context
     retriever = MultiQueryRetriever.from_llm(
         vector_db.as_retriever(), 
         llm,
         prompt=QUERY_PROMPT
     )
 
+    # Answering the question
     template = """Answer the question based ONLY on the following context:
     {context}
     Question: {question}
     """
     prompt = ChatPromptTemplate.from_template(template)
 
+    # Putting all the information together from the previous steps
     chain = (
         {"context": retriever, "question": RunnablePassthrough()}
         | prompt
@@ -147,10 +151,12 @@ def process_question(question: str, vector_db: Chroma, selected_model: str) -> s
         | StrOutputParser()
     )
 
+    # Giving the answer 
     response = chain.invoke(question)
     logger.info("Question processed and response generated")
     return response
 
+# Caching the data. If all the documents are the same (upload the same doc), it won't process it
 @st.cache_data
 def extract_all_pages_as_images(file_upload) -> List[Any]:
     """
@@ -163,6 +169,7 @@ def extract_all_pages_as_images(file_upload) -> List[Any]:
     logger.info("PDF pages extracted as images")
     return pdf_pages
 
+# Deleting all the temp files
 def delete_vector_db(vector_db: Optional[Chroma]) -> None:
     """
     Delete the vector database and clear related session state.
@@ -256,7 +263,7 @@ def main() -> None:
     if prompt := st.chat_input("Ask a question..."):
         st.session_state["messages"].append({"role": "user", "content": prompt})
         with st.spinner("Processing..."):
-            response = process_question(prompt, st.session_state.get("vector_db"), selected_model)
+            response = process_question(prompt, st.session_state.get("vector_db"), selected_model) # asking the question
         st.session_state["messages"].append({"role": "assistant", "content": response})
 
     for msg in st.session_state["messages"]:
